@@ -1,8 +1,7 @@
-import { SavParser, Feeder } from 'jsr:@leaf/sav-reader'
-import { parquetRead } from 'npm:hyparquet'
-// @deno-types="https://cdn.sheetjs.com/xlsx-0.20.3/package/types/index.d.ts"
-import { read, utils, write } from 'https://cdn.sheetjs.com/xlsx-0.20.3/package/xlsx.mjs'
-import { parse, set_utils } from 'https://cdn.sheetjs.com/dta-0.0.2/package/dist/dta.mjs'
+import { SavParser, Feeder } from 'jsr:@leaf/sav-reader@0.0.1'
+import { parquetRead } from 'npm:hyparquet@1.5.0'
+import { read, utils, write } from './xlsx.js'
+import { parse, set_utils } from './dta.js'
 import { XLSX_ZAHL_PAYLOAD } from './numbers.ts'
 
 /**
