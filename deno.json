@@ -1,0 +1,15 @@
+{
+  "name": "@psych/sheet",
+  "version": "1.0.0",
+  "fmt": {
+    "semiColons": false,
+    "singleQuote": true,
+    "include": [
+      "lib/**/*.ts"
+    ]
+  },
+  "exports": {
+    ".": "./lib/index.ts"
+  },
+  "license": "GPL-3.0"
+}
