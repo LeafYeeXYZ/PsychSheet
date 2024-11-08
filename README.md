@@ -2,13 +2,13 @@
 
 [![JSR Version](https://jsr.io/badges/@psych/sheet)](https://jsr.io/@psych/sheet) [![JSR Scope](https://jsr.io/badges/@psych)](https://jsr.io/@psych) [![JSR Score](https://jsr.io/badges/@psych/sheet/score)](https://jsr.io/@psych/sheet/score)
 
-**PsychSheet** is a TypeScript library for parsing any data files into a universal format. It can be used to parse `.csv`, `.xlsx`, `.sav`, `.json`, `.parquet`, `.dta`, `.numbers`, etc., into a json object array. And export the data to `.csv`, `.xlsx`, `.numbers`, etc.
+**PsychSheet** is a TypeScript library for parsing any data files into a universal format. It can be used to parse `.csv`, `.xlsx`, `.sav`, `.parquet`, `.dta`, `.numbers`, etc., into a json object array. And export the data to `.csv`, `.xlsx`, `.numbers`, etc.
 
 - PsychSheet can be used in all modern JavaScript/TypeScript environments, including browsers, Node.js, Deno, and Bun.
 - PsychSheet mainly based on [SheetJS](https://sheetjs.com/), but added more file formats for psychological and educational research.
 - For use cases, please refer to my another project [PsychPen](https://github.com/LeafYeeXYZ/PsychPen).
 
-**For full documentation, see <https://jsr.io/@psych/sheet/doc>.**
+**For full documentation and supported file formats, see <https://jsr.io/@psych/sheet/doc>.**
 
 - [Introduction](#introduction)
 - [Qiuck Start](#qiuck-start)
@@ -54,7 +54,7 @@ console.log(data[0], data.length)
 await writeFile(resolve(import.meta.dirname!, 'example.csv'), exportSheet(data, 'csv'))
 ```
 
-**For full documentation, see <https://jsr.io/@psych/sheet/doc>.**
+**For full documentation and supported file formats, see <https://jsr.io/@psych/sheet/doc>.**
 
 # Development
 
