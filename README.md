@@ -58,6 +58,10 @@ await writeFile(resolve(import.meta.dirname!, 'example.csv'), exportSheet(data, 
 
 # Development
 
+- `sav` file format is supported by <https://github.com/mhermher/savvy>, but it doesn't work directly in Deno. So I have to download the `savvy` source code and modify it to make it work in this project. The modified source code is in the `/lib/sav` folder.
+- `parquet` file format is supported by <https://github.com/hyparam/hyparquet>.
+- `dta`、`xlsx`、`numbers` file formats are supported by <https://sheetjs.com/>. But `JSR` doesn't support importing modules from third-party URLs, so I have to download the source code and import them locally. You can find the source code in the `/lib/xlsx` folder.
+
 If you haven't installed `deno` yet, please install it referring to the <https://deno.com>. Then, clone this repository.
 
 ```bash

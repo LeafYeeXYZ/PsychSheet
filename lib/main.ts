@@ -1,8 +1,8 @@
-import { SavParser, Feeder } from 'jsr:@leaf/sav-reader@0.0.1'
+import { SavParser, Feeder } from './sav/main.ts'
 import { parquetRead } from 'npm:hyparquet@1.5.0'
-import { read, utils, write } from './xlsx.js'
-import { parse, set_utils } from './dta.js'
-import { XLSX_ZAHL_PAYLOAD } from './numbers.ts'
+import { read, utils, write } from './xlsx/xlsx.js'
+import { parse, set_utils } from './xlsx/dta.js'
+import { XLSX_ZAHL_PAYLOAD } from './xlsx/numbers.ts'
 
 /**
  * The supported file types for importing data.
