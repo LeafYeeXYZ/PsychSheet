@@ -1,7 +1,7 @@
-import { SavParser, Feeder } from './sav/main.ts'
+import { SavParser, Feeder } from 'npm:jsavvy@0.0.6'
 import { parquetRead } from 'npm:hyparquet@1.5.0'
 import { read, utils, write } from './xlsx/xlsx.js'
-import { parse, set_utils } from './xlsx/dta.js'
+import { parse, set_utils } from './xlsx/dta.ts'
 import { XLSX_ZAHL_PAYLOAD } from './xlsx/numbers.ts'
 
 /**
@@ -72,6 +72,7 @@ export async function importSheet(file: ArrayBuffer, type: ImportTypes): Promise
     case 'sav': {
       const parser = new SavParser()
       const feeder = new Feeder(file)
+      //@ts-expect-error it actually exists
       return (await parser.all(feeder)).rows.map((map: Map<string, unknown>) => Object.fromEntries(map))
     }
     case 'parquet': {
