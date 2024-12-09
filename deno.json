@@ -1,6 +1,6 @@
 {
   "name": "@psych/sheet",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "fmt": {
     "semiColons": false,
     "singleQuote": true,

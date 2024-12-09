@@ -1,4 +1,4 @@
-import { SavParser, Feeder } from 'npm:jsavvy@0.0.6'
+import { SavParser, Feeder } from './sav/main.ts'
 import { parquetRead } from 'npm:hyparquet@1.5.0'
 import { read, utils, write } from './xlsx/xlsx.js'
 import { parse, set_utils } from './xlsx/dta.ts'

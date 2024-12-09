@@ -58,8 +58,8 @@ await writeFile(resolve(import.meta.dirname!, 'example.csv'), exportSheet(data, 
 
 # Development
 
-- `sav` file format is supported by <https://github.com/mhermher/savvy>.
 - `parquet` file format is supported by <https://github.com/hyparam/hyparquet>.
+- `sav` file format is supported by <https://github.com/mhermher/savvy>. But it doesn't run in the Browser originally `can not found 'global' error`, so I have to modify the source code to make it work. You can find the source code in the `/lib/sav` folder.
 - `dta`、`xlsx`、`numbers` file formats are supported by <https://sheetjs.com/>. But `JSR` doesn't support importing modules from third-party URLs, so I have to download the source code and import them locally. You can find the source code in the `/lib/xlsx` folder.
 
 If you haven't installed `deno` yet, please install it referring to the <https://deno.com>. Then, clone this repository.
