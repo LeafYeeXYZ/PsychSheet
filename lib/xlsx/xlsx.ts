@@ -1,3 +1,4 @@
+// @ts-nocheck
 // deno-lint-ignore-file
 /*! xlsx.js (C) 2013-present SheetJS -- http://sheetjs.com */
 /* vim: set ts=2: */
