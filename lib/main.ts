@@ -104,6 +104,11 @@ export async function importSheet<T = { [key: string]: unknown }>(
     case 'json': {
       return JSON.parse(new TextDecoder().decode(file))
     }
+    case 'csv': {
+      const text = new TextDecoder('utf-8').decode(file)
+      const workbook = read(text, { type: 'string' })
+      return utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]) as T[]
+    }
     default: {
       const workbook = read(file)
       return utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]) as T[]
