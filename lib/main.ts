@@ -8,7 +8,7 @@ import { XLSX_ZAHL_PAYLOAD } from './xlsx/numbers.ts'
 /**
  * The supported file types for importing data.
  */
-export const enum ImportTypes {
+export enum ImportTypes {
   XLS = 'xls',
   XLSX = 'xlsx',
   CSV = 'csv',
@@ -23,7 +23,7 @@ export const enum ImportTypes {
 /**
  * The supported file types for exporting data.
  */
-export const enum ExportTypes {
+export enum ExportTypes {
   XLSX = 'xlsx',
   CSV = 'csv',
   NUMBERS = 'numbers',
