@@ -1,19 +1,19 @@
-import { importSheet, exportSheet } from '../lib/main.ts'
+import { importSheet, exportSheet, ImportTypes, ExportTypes } from '../lib/main.ts'
 import { assertEquals } from 'jsr:@std/assert'
 import { readFile, writeFile, unlink } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 const file = await readFile(resolve(import.meta.dirname!, 'demo.csv'))
-const sheet = await importSheet(file, 'csv')
+const sheet = await importSheet(file, ImportTypes.CSV)
 
 Deno.test('Import', async () => {
   assertEquals(sheet.length, 85)
-  const xlsx = await importSheet(await readFile(resolve(import.meta.dirname!, 'demo.xlsx')), 'xlsx')
-  const json = await importSheet(await readFile(resolve(import.meta.dirname!, 'demo.json')), 'json')
-  const numbers = await importSheet(await readFile(resolve(import.meta.dirname!, 'demo.numbers')), 'numbers')
-  const dta = await importSheet(await readFile(resolve(import.meta.dirname!, 'demo.dta')), 'dta')
-  const sav = await importSheet(await readFile(resolve(import.meta.dirname!, 'demo.sav')), 'sav')
-  const parquet = await importSheet(await readFile(resolve(import.meta.dirname!, 'demo.parquet')), 'parquet')
+  const xlsx = await importSheet(await readFile(resolve(import.meta.dirname!, 'demo.xlsx')), ImportTypes.XLSX)
+  const json = await importSheet(await readFile(resolve(import.meta.dirname!, 'demo.json')), ImportTypes.JSON)
+  const numbers = await importSheet(await readFile(resolve(import.meta.dirname!, 'demo.numbers')), ImportTypes.NUMBERS)
+  const dta = await importSheet(await readFile(resolve(import.meta.dirname!, 'demo.dta')), ImportTypes.DTA)
+  const sav = await importSheet(await readFile(resolve(import.meta.dirname!, 'demo.sav')), ImportTypes.SAV)
+  const parquet = await importSheet(await readFile(resolve(import.meta.dirname!, 'demo.parquet')), ImportTypes.PARQUET)
   assertEquals(xlsx instanceof Array, true)
   assertEquals(json instanceof Array, true)
   assertEquals(numbers instanceof Array, true)
@@ -35,10 +35,10 @@ Deno.test('Import', async () => {
 })
 
 Deno.test('Export', async () => {
-  const json = exportSheet(sheet, 'json')
-  const numbers = exportSheet(sheet, 'numbers')
-  const xlsx = exportSheet(sheet, 'xlsx')
-  const csv = exportSheet(sheet, 'csv')
+  const json = exportSheet(sheet, ExportTypes.JSON)
+  const numbers = exportSheet(sheet, ExportTypes.NUMBERS)
+  const xlsx = exportSheet(sheet, ExportTypes.XLSX)
+  const csv = exportSheet(sheet, ExportTypes.CSV)
   const exportName = 'PsychSheet_Export'
   await writeFile(resolve(import.meta.dirname!, `${exportName}.json`), json)
   await writeFile(resolve(import.meta.dirname!, `${exportName}.numbers`), numbers)

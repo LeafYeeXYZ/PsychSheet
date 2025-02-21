@@ -8,15 +8,32 @@ import { XLSX_ZAHL_PAYLOAD } from './xlsx/numbers.ts'
 /**
  * The supported file types for importing data.
  */
-export type ImportTypes = 'xls' | 'xlsx' | 'csv' | 'txt' | 'json' | 'numbers' | 'dta' | 'sav' | 'parquet'
+export const enum ImportTypes {
+  XLS = 'xls',
+  XLSX = 'xlsx',
+  CSV = 'csv',
+  TXT = 'txt',
+  JSON = 'json',
+  NUMBERS = 'numbers',
+  DTA = 'dta',
+  SAV = 'sav',
+  PARQUET = 'parquet'
+}
+
 /**
  * The supported file types for exporting data.
  */
-export type ExportTypes = 'xlsx' | 'csv' | 'numbers' | 'json'
+export const enum ExportTypes {
+  XLSX = 'xlsx',
+  CSV = 'csv',
+  NUMBERS = 'numbers',
+  JSON = 'json'
+}
+
 /**
  * Export data to a file.
  * @param sheet The data to export.
- * @param type The type of the file (e.g., 'xlsx', 'csv', 'json').
+ * @param type The type of the file.
  * @param filename The name of the file without the extension (default: 'PsychSheet').
  * @returns The exported data.
  */
@@ -25,17 +42,18 @@ export function exportSheet(
   type: ExportTypes, 
   filename: string = 'PsychSheet'
 ): Uint8Array {
-  if (type === 'json') {
+  if (type === ExportTypes.JSON) {
     return new TextEncoder().encode(JSON.stringify(sheet, null, 2))
   }
   const worksheet = utils.json_to_sheet(sheet)
   const workbook = utils.book_new(worksheet, filename + type)
   return new Uint8Array(write(workbook, { type: 'array', bookType: type, numbers: XLSX_ZAHL_PAYLOAD }))
 }
+
 /**
  * Download data as a file. Only works in the browser.
  * @param sheet The data to download.
- * @param type The type of the file (e.g., 'xlsx', 'csv', 'json').
+ * @param type The type of the file.
  * @param filename The name of the file without the extension (default: 'PsychSheet').
  * @throws {Error} Only works in the browser.
  */
@@ -58,10 +76,11 @@ export function downloadSheet(
   a.download = filename + '.' + type
   a.click()
 }
+
 /**
  * Import data from a file.
  * @param file The file to import.
- * @param type The type of the file (e.g., 'xlsx', 'csv', 'json').
+ * @param type The type of the file.
  * @returns The imported data.
  */
 export async function importSheet<T = { [key: string]: unknown }>(
@@ -72,18 +91,18 @@ export async function importSheet<T = { [key: string]: unknown }>(
     file = new Uint8Array(file).buffer
   }
   switch (type) {
-    case 'dta': {
+    case ImportTypes.DTA: {
       set_utils(utils)
       const workbook = await parse(new Uint8Array(file))
       return utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]) as T[]
     }
-    case 'sav': {
+    case ImportTypes.SAV: {
       const parser = new SavParser()
       const feeder = new Feeder(file)
       //@ts-expect-error it actually exists
       return (await parser.all(feeder)).rows.map((map: Map<string, unknown>) => Object.fromEntries(map))
     }
-    case 'parquet': {
+    case ImportTypes.PARQUET: {
       let rows: T[] = []
       await parquetRead({
         file,
@@ -95,19 +114,15 @@ export async function importSheet<T = { [key: string]: unknown }>(
       })
       return rows
     }
-    case 'txt': {
+    case ImportTypes.CSV:
+    case ImportTypes.TXT: {
       // Sheet.js default encoding is utf-16
       const text = new TextDecoder('utf-8').decode(file)
       const workbook = read(text, { type: 'string' })
       return utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]) as T[]
     }
-    case 'json': {
+    case ImportTypes.JSON: {
       return JSON.parse(new TextDecoder().decode(file))
-    }
-    case 'csv': {
-      const text = new TextDecoder('utf-8').decode(file)
-      const workbook = read(text, { type: 'string' })
-      return utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]) as T[]
     }
     default: {
       const workbook = read(file)
